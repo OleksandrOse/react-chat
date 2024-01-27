@@ -7,7 +7,6 @@ import { Chat } from './pages/Chat/Chat';
 import { useEffect } from 'react';
 
 const socket = io.connect('https://node-chat-db.onrender.com');
-console.log(socket)
 
 export const App = () => {
   const [userName, setUserName] = useState(localStorage.getItem('user') || '');
