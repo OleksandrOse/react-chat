@@ -6,6 +6,15 @@ export const RoomAndUsers = ({ socket, userName, room, setRooms }) => {
   const [roomUsers, setRoomUsers] = useState([]);
   console.log(roomUsers);
   const navigate = useNavigate();
+  const uniqueIds = new Set();
+
+  let filteredArray = roomUsers.filter(item => {
+    if (!uniqueIds.has(item.id)) {
+        uniqueIds.add(item.id);
+        return true;
+    }
+    return false;
+});
 
   useEffect(() => {
     socket.on('chatroom_users', (data) => {
@@ -34,9 +43,9 @@ export const RoomAndUsers = ({ socket, userName, room, setRooms }) => {
       <h2 className="room-title">{room}</h2>
 
       <div>
-        {roomUsers.length > 0 && <h5 className="users-title">Users:</h5>}
+        {filteredArray.length > 0 && <h5 className="users-title">Users:</h5>}
         <ul className="users-list">
-          {roomUsers.map((user) => (
+          {filteredArray.map((user) => (
             <li
               className="user-item"
               key={user.id}
