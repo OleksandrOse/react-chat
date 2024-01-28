@@ -4,17 +4,18 @@ import './RoomAndUsers.css';
 
 export const RoomAndUsers = ({ socket, userName, room, setRooms }) => {
   const [roomUsers, setRoomUsers] = useState([]);
-  console.log(roomUsers);
+
   const navigate = useNavigate();
   const uniqueIds = new Set();
 
-  let filteredArray = roomUsers.filter(item => {
+  const filteredArray = roomUsers.filter(item => {
     if (!uniqueIds.has(item.id)) {
         uniqueIds.add(item.id);
         return true;
     }
+
     return false;
-});
+  });
 
   useEffect(() => {
     socket.on('chatroom_users', (data) => {
