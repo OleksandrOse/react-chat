@@ -13,7 +13,8 @@ export const App = () => {
   const [room, setRoom] = useState(localStorage.getItem('room') || '');
   const [rooms, setRooms] = useState([]);
   const socketId = socket.id;
-
+  console.log(room)
+  console.log(rooms);
   useEffect(() => {
     socket.on('rooms', (data) => {
       setRooms(data.rooms);
