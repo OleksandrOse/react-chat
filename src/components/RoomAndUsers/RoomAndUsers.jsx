@@ -4,7 +4,7 @@ import './RoomAndUsers.css';
 
 export const RoomAndUsers = ({ socket, userName, room, setRooms }) => {
   const [roomUsers, setRoomUsers] = useState([]);
-
+  console.log(roomUsers);
   const navigate = useNavigate();
 
   useEffect(() => {
