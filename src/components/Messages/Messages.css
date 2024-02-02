@@ -6,9 +6,16 @@
 .message {
   background: #00186f;
   border-radius: 6px;
+  margin-right: 100px;
   margin-bottom: 24px;
   max-width: 600px;
   padding: 12px;
+}
+
+.message-mine {
+  background: #028a14;
+  margin-right: 0;
+  margin-left: 100px;
 }
 
 .message-container {
