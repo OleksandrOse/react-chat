@@ -18,7 +18,7 @@ export const Chat = ({ socket, room, userName, setRooms }) => {
     <div className="chat-container">
        <RoomAndUsers socket={socket} userName={userName} room={room} setRooms={setRooms} />
       <div>
-        <Messages socket={socket} />
+        <Messages socket={socket} userName={userName} />
         <SendMessage socket={socket} userName={userName} room={room} />
       </div>
     </div>

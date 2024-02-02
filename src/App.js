@@ -30,7 +30,8 @@ export const App = () => {
       socket.emit('join_room', { userName, room });
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => socket.off('rooms');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socketId]);
 
   return (

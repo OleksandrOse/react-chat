@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+import cn from 'classnames';
 import './Messages.css';
 
-export const Messages = ({ socket }) => {
+export const Messages = ({ socket, userName }) => {
   const [messagesRecieved, setMessagesReceived] = useState([]);
   const messagesColumnRef = useRef(null);
 
@@ -17,17 +18,16 @@ export const Messages = ({ socket }) => {
       ]);
     });
 
-    return () => socket.off('receive_message');
-  }, [socket]);
-
-  useEffect(() => {
     socket.on('last_messages', (lastMessages) => {
 
       lastMessages = sortMessagesByDate(lastMessages);
       setMessagesReceived((state) => [...lastMessages, ...state]);
     });
 
-    return () => socket.off('last_messages');
+    return () => {
+      socket.off('receive_message');
+      socket.off('last_messages');
+    }
   }, [socket]);
 
   useEffect(() => {
@@ -50,7 +50,13 @@ export const Messages = ({ socket }) => {
   return (
     <div className="messages-column" ref={messagesColumnRef}>
       {messagesRecieved.map((message, i) => (
-        <div className="message" key={i}>
+        <div
+          className={cn(
+            "message",
+            { 'message-mine': message.userName === userName }
+          )}
+          key={i}
+        >
           <div className="message-container">
             <span className="message-meta">{message.userName}</span>
             <span className="message-meta">
